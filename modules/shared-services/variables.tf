@@ -1,0 +1,10 @@
+variable "resource_group_name" { type = string }
+variable "location" { type = string }
+variable "unique_name" { type = string }
+variable "compact_name" { type = string }
+variable "residents_container_name" { type = string }
+variable "access_logs_container_name" { type = string }
+variable "access_logs_retention_days" { type = number }
+variable "use_key_vault" { type = bool }
+variable "key_vault_public_network_access_enabled" { type = bool }
+variable "tags" { type = map(string) }
