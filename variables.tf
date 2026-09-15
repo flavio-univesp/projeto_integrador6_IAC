@@ -114,7 +114,7 @@ variable "container_image_tag" {
 variable "container_target_port" {
   description = "Porta HTTP exposta pelo container."
   type        = number
-  default     = 8080
+  default     = 3000
 }
 
 variable "container_cpu" {
@@ -138,7 +138,7 @@ variable "container_min_replicas" {
 variable "container_max_replicas" {
   description = "Quantidade maxima de replicas."
   type        = number
-  default     = 3
+  default     = 1
 }
 
 variable "iot_hub_sku" {

@@ -74,6 +74,7 @@ module "container_apps" {
   container_app_name              = "ca-${local.unique_name}"
   infrastructure_subnet_id        = module.network.container_apps_subnet_id
   user_assigned_identity_id       = module.shared_services.user_assigned_identity_id
+  user_assigned_identity_client_id = module.shared_services.user_assigned_identity_client_id
   acr_login_server                = module.shared_services.acr_login_server
   deploy_container_app            = var.deploy_container_app
   image_repository                = var.container_image_repository
@@ -95,6 +96,8 @@ module "container_apps" {
   access_logs_blob_container_name = module.shared_services.access_logs_container_name
   event_grid_webhook_secret       = module.shared_services.event_grid_webhook_secret
   event_grid_webhook_secret_id    = module.shared_services.event_grid_webhook_secret_id
+  session_secret                  = module.shared_services.session_secret
+  session_secret_id               = module.shared_services.session_secret_id
   tags                            = var.tags
 
   depends_on = [module.shared_services, module.mysql]

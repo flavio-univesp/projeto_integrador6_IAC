@@ -1,6 +1,6 @@
-location    = "brazilsouth"
+location    = "canadaeast"
 project_name = "condoacesso"
-environment  = "dev"
+environment  = "prd"
 
 vnet_address_space         = "10.20.0.0/16"
 container_apps_subnet_cidr = "10.20.0.0/23"
@@ -14,14 +14,17 @@ mysql_high_availability     = false
 mysql_database_name         = "condoservicos"
 mysql_administrator_login   = "condoadmin"
 
-deploy_container_app      = false
+use_key_vault                          = true
+key_vault_public_network_access_enabled = true
+
+deploy_container_app      = true
 container_image_repository = "condoacesso-api"
-container_image_tag        = "latest"
-container_target_port      = 8080
+container_image_tag        = "1.0.1"
+container_target_port      = 3000
 container_cpu             = 0.5
 container_memory          = "1Gi"
 container_min_replicas    = 1
-container_max_replicas    = 3
+container_max_replicas    = 1
 
 iot_hub_sku               = "S1"
 iot_hub_capacity          = 1
@@ -31,6 +34,7 @@ access_logs_retention_days = 30
 
 tags = {
   projeto        = "UNIVESP-Projeto-Integrador-VI"
-  ambiente       = "dev"
+  grupo          = "DRP04-Turma-001"
+  ambiente       = "prd"
   gerenciado_por = "terraform"
 }
