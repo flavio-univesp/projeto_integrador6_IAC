@@ -2,6 +2,10 @@ output "user_assigned_identity_id" {
   value = azurerm_user_assigned_identity.container_app.id
 }
 
+output "user_assigned_identity_client_id" {
+  value = azurerm_user_assigned_identity.container_app.client_id
+}
+
 output "acr_name" {
   value = azurerm_container_registry.main.name
 }
@@ -46,4 +50,13 @@ output "event_grid_webhook_secret" {
 
 output "event_grid_webhook_secret_id" {
   value = var.use_key_vault ? azurerm_key_vault_secret.event_grid_webhook[0].versionless_id : null
+}
+
+output "session_secret" {
+  value     = random_password.session_secret.result
+  sensitive = true
+}
+
+output "session_secret_id" {
+  value = var.use_key_vault ? azurerm_key_vault_secret.session_secret[0].versionless_id : null
 }

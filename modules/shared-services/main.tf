@@ -39,7 +39,7 @@ resource "azurerm_storage_account" "main" {
   account_tier                    = "Standard"
   account_replication_type        = "LRS"
   min_tls_version                 = "TLS1_2"
-  public_network_access_enabled   = false
+  public_network_access_enabled   = true
   allow_nested_items_to_be_public = false
   shared_access_key_enabled       = false
   tags                            = var.tags
@@ -82,11 +82,26 @@ resource "random_password" "event_grid_webhook" {
   special = false
 }
 
+resource "random_password" "session_secret" {
+  length  = 64
+  special = false
+}
+
 resource "azurerm_key_vault_secret" "event_grid_webhook" {
   count = var.use_key_vault ? 1 : 0
 
   name         = "event-grid-webhook-secret"
   value        = random_password.event_grid_webhook.result
+  key_vault_id = azurerm_key_vault.main[0].id
+
+  depends_on = [azurerm_role_assignment.current_user_key_vault_secrets_officer]
+}
+
+resource "azurerm_key_vault_secret" "session_secret" {
+  count = var.use_key_vault ? 1 : 0
+
+  name         = "session-secret"
+  value        = random_password.session_secret.result
   key_vault_id = azurerm_key_vault.main[0].id
 
   depends_on = [azurerm_role_assignment.current_user_key_vault_secrets_officer]
