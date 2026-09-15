@@ -4,6 +4,7 @@ variable "environment_name" { type = string }
 variable "container_app_name" { type = string }
 variable "infrastructure_subnet_id" { type = string }
 variable "user_assigned_identity_id" { type = string }
+variable "user_assigned_identity_client_id" { type = string }
 variable "acr_login_server" { type = string }
 variable "deploy_container_app" { type = bool }
 variable "image_repository" { type = string }
@@ -40,6 +41,14 @@ variable "event_grid_webhook_secret" {
   sensitive = true
 }
 variable "event_grid_webhook_secret_id" {
+  type     = string
+  nullable = true
+}
+variable "session_secret" {
+  type      = string
+  sensitive = true
+}
+variable "session_secret_id" {
   type     = string
   nullable = true
 }

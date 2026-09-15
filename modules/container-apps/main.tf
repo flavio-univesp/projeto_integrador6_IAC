@@ -76,6 +76,15 @@ resource "azurerm_container_app" "main" {
   }
 
   dynamic "secret" {
+    for_each = var.use_key_vault ? [] : [1]
+
+    content {
+      name  = "session-secret"
+      value = var.session_secret
+    }
+  }
+
+  dynamic "secret" {
     for_each = var.use_key_vault ? [1] : []
 
     content {
@@ -105,6 +114,16 @@ resource "azurerm_container_app" "main" {
     }
   }
 
+  dynamic "secret" {
+    for_each = var.use_key_vault ? [1] : []
+
+    content {
+      name                = "session-secret"
+      key_vault_secret_id = var.session_secret_id
+      identity            = var.user_assigned_identity_id
+    }
+  }
+
   ingress {
     external_enabled = true
     target_port      = var.target_port
@@ -125,6 +144,36 @@ resource "azurerm_container_app" "main" {
       image  = "${var.acr_login_server}/${var.image_repository}:${var.image_tag}"
       cpu    = var.cpu
       memory = var.memory
+
+      startup_probe {
+        transport               = "HTTP"
+        port                    = var.target_port
+        path                    = "/health/live"
+        initial_delay           = 5
+        interval_seconds        = 10
+        timeout                 = 5
+        failure_count_threshold = 30
+      }
+
+      readiness_probe {
+        transport               = "HTTP"
+        port                    = var.target_port
+        path                    = "/health/ready"
+        interval_seconds        = 10
+        timeout                 = 5
+        failure_count_threshold = 3
+        success_count_threshold = 1
+      }
+
+      liveness_probe {
+        transport               = "HTTP"
+        port                    = var.target_port
+        path                    = "/health/live"
+        initial_delay           = 10
+        interval_seconds        = 30
+        timeout                 = 5
+        failure_count_threshold = 3
+      }
 
       env {
         name  = "DB_HOST"
@@ -152,13 +201,33 @@ resource "azurerm_container_app" "main" {
       }
 
       env {
-        name  = "DB_SSL_MODE"
-        value = "REQUIRED"
+        name  = "DB_SSL"
+        value = "true"
+      }
+
+      env {
+        name  = "NODE_ENV"
+        value = "production"
+      }
+
+      env {
+        name  = "PORT"
+        value = "3000"
+      }
+
+      env {
+        name        = "SESSION_SECRET"
+        secret_name = "session-secret"
       }
 
       env {
         name  = "AZURE_STORAGE_ACCOUNT_NAME"
         value = var.storage_account_name
+      }
+
+      env {
+        name  = "AZURE_CLIENT_ID"
+        value = var.user_assigned_identity_client_id
       }
 
       env {
