@@ -1,6 +1,39 @@
-# Infraestrutura CondoAcesso
 
-Terraform modular para criar no Azure:
+<p align="center"> <i>Desenvolvido com dedicação pelo grupo <strong>CondoAcessos</strong> — Projeto Integrador em Computação VI (UNIVESP, 2026)</i> </p> </div>
+
+---
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/50468352/141820811-412e9364-7f5c-4889-826a-fcba23b92e23.png" width="350" alt="Logo do Projeto" />
+</p>
+
+<h3 align="center">📌 Projeto Integrador em Computação VI - 2026</h3>
+
+<p align="center"><strong>Polos:</strong> Araras-SP, Campinas-SP, Elias Fausto-SP, Estiva Gerbi-SP, Indaiatuba-SP, Leme-SP, Várzea Paulista-SP</p>
+<p align="center"><strong>Orientadora do PI:</strong> Aline Santana</p>
+
+---
+
+## 👥 Integrantes do grupo
+
+| Nome                                | RA       |
+|-------------------------------------|----------|
+| Daniel Anunciato                    | 2222677  |
+| Eder Clauber dos Santos dos Anjos   | 1806662  |
+| Felipe Rafael Henriques             | 2214261  |
+| Flavio Jorge de Medeiros            | 23205233 |
+| Francisco Ribeiro da Silva Junior   | 2108392  |
+| Kelven Joseph Machado Santos        | 2100626  |
+| Matheus Eduardo Peixoto de Carvalho | 2205301  |
+| Nicolly de Sousa Lima               | 2205907  |
+
+---
+
+## 💡 Projeto: *CondoAcesso — Infraestrutura como Código no Microsoft Azure*
+
+> **Infraestrutura modular desenvolvida com Terraform para provisionar no Microsoft Azure os recursos utilizados pela aplicação web e pelos dispositivos IoT do CondoAcesso.**
+
+O Terraform cria e configura:
 
 - VNet e subnets dedicadas para Azure Container Apps e MySQL;
 - NSGs e Private DNS Zone do MySQL;
@@ -11,6 +44,8 @@ Terraform modular para criar no Azure:
 - Event Grid filtrado para arquivos `.ndjson` gravados no container `logs-acesso`;
 - Application Insights e Log Analytics;
 - Container Apps Environment e, após a publicação da imagem, o Container App com ingress HTTPS público, probes de saúde e configuração da aplicação.
+
+---
 
 ## Pré-requisitos
 
@@ -208,8 +243,6 @@ Não desabilite o endpoint público sem antes disponibilizar uma rota privada pa
 Execute na pasta raiz do projeto, onde estão `main.tf` e `terraform.tfstate`:
 
 ```powershell
-cd "D:\One-MS\OneDrive - Microsoft\Desktop\UNIVESP\7 Semestre\PjI6\Repo\projeto_integrador6_IAC"
-
 terraform plan -destroy -out destroy.tfplan
 terraform apply destroy.tfplan
 ```
@@ -257,3 +290,39 @@ Todos os links encontravam-se funcionais em 18/09/2026:
 - [Controle de acesso ao Azure Key Vault com RBAC](https://learn.microsoft.com/azure/key-vault/general/rbac-guide): funções para criação e leitura de segredos nos planos de controle e de dados.
 - [Visão geral do Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview): coleta de telemetria, métricas, logs e análise do comportamento da aplicação.
 - [Calculadora de preços do Azure](https://azure.microsoft.com/pricing/calculator/): elaboração e atualização das estimativas de custo da infraestrutura.
+
+## 🧰 Tecnologias e ferramentas utilizadas
+
+### Infraestrutura como código
+
+<p>
+  <img src="https://img.shields.io/badge/Terraform-844FBA?style=for-the-badge&logo=terraform&logoColor=white" alt="Terraform Badge"/>
+  <img src="https://img.shields.io/badge/HCL-844FBA?style=for-the-badge&logo=hashicorp&logoColor=white" alt="HCL Badge"/>
+  <img src="https://img.shields.io/badge/AzureRM_Provider-844FBA?style=for-the-badge&logo=terraform&logoColor=white" alt="AzureRM Provider Badge"/>
+</p>
+
+### Nuvem e serviços gerenciados
+
+<p>
+  <img src="https://img.shields.io/badge/Microsoft_Azure-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white" alt="Microsoft Azure Badge"/>
+  <img src="https://img.shields.io/badge/Azure_Container_Apps-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white" alt="Azure Container Apps Badge"/>
+  <img src="https://img.shields.io/badge/Azure_Container_Registry-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white" alt="Azure Container Registry Badge"/>
+  <img src="https://img.shields.io/badge/Azure_Database_for_MySQL-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white" alt="Azure Database for MySQL Badge"/>
+  <img src="https://img.shields.io/badge/Azure_Blob_Storage-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white" alt="Azure Blob Storage Badge"/>
+  <img src="https://img.shields.io/badge/Azure_IoT_Hub-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white" alt="Azure IoT Hub Badge"/>
+  <img src="https://img.shields.io/badge/Azure_Event_Grid-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white" alt="Azure Event Grid Badge"/>
+  <img src="https://img.shields.io/badge/Azure_Key_Vault-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white" alt="Azure Key Vault Badge"/>
+  <img src="https://img.shields.io/badge/Application_Insights-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white" alt="Application Insights Badge"/>
+  <img src="https://img.shields.io/badge/Managed_Identity-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white" alt="Azure Managed Identity Badge"/>
+</p>
+
+### Provisionamento e controle de versão
+
+<p>
+  <img src="https://img.shields.io/badge/Azure_CLI-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white" alt="Azure CLI Badge"/>
+  <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Badge"/>
+</p>
+
+---
+
+<p align="center"><i>Desenvolvido com dedicação pelo grupo <strong>CondoAcessos</strong> — Projeto Integrador em Computação VI (UNIVESP, 2026)</i></p>
