@@ -19,7 +19,7 @@ key_vault_public_network_access_enabled = true
 
 deploy_container_app      = true
 container_image_repository = "condoacesso-api"
-container_image_tag        = "1.0.1"
+container_image_tag        = "1.0.3"
 container_target_port      = 3000
 container_cpu             = 0.5
 container_memory          = "1Gi"
