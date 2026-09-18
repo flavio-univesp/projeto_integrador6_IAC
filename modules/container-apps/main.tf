@@ -25,7 +25,7 @@ resource "azurerm_container_app_environment" "main" {
   tags                       = var.tags
 
   lifecycle {
-    ignore_changes = [workload_profile]
+    ignore_changes = [infrastructure_resource_group_name, workload_profile]
   }
 }
 
@@ -36,6 +36,7 @@ resource "azurerm_container_app" "main" {
   container_app_environment_id = azurerm_container_app_environment.main.id
   resource_group_name          = var.resource_group_name
   revision_mode                = "Single"
+  workload_profile_name        = "Consumption"
   tags                         = var.tags
 
   identity {
