@@ -64,7 +64,7 @@ resource "azurerm_eventgrid_event_subscription" "access_logs" {
   }
 
   subject_filter {
-    subject_begins_with = "/blobServices/default/containers/${var.access_logs_container_name}/blobs/logs/"
+    subject_begins_with = "/blobServices/default/containers/${var.access_logs_container_name}/blobs/"
     subject_ends_with   = ".ndjson"
     case_sensitive      = false
   }
