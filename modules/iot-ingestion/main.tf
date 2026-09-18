@@ -53,7 +53,9 @@ resource "azurerm_eventgrid_event_subscription" "access_logs" {
   included_event_types = ["Microsoft.Storage.BlobCreated"]
 
   webhook_endpoint {
-    url = "https://${var.container_app_fqdn}${var.event_grid_webhook_path}"
+    url                               = "https://${var.container_app_fqdn}${var.event_grid_webhook_path}"
+    max_events_per_batch              = 1
+    preferred_batch_size_in_kilobytes = 64
   }
 
   delivery_property {
